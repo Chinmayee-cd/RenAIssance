@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 siko el dinsas
 
 De
@@ -15,3 +16,22 @@ eafacíe en Palas
 
 
 
+=======
+siko el dinsas
+
+De
+
+
+
+a palabra ; por
+quMageitad
+
+T liii -
+inftancia doña Ana
+eafacíe en Palas
+
+
+
+
+
+>>>>>>> 0577fbaf673c3f23bd9da458071ca83cb5589cae

@@ -1,0 +1,35 @@
+# Python virtual environment
+venv/
+env/
+ENV/
+
+# Python byte-compiled files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Distribution / packaging
+dist/
+build/
+*.egg-info/
+
+# IDE settings
+.vscode/
+.idea/
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# Model checkpoints and large files
+*.pth
+*.pt
+*.ckpt
+*.bin
+*.h5
+*.hdf5
+*.pkl
+*.npy
+
+# Logs
+*.log
+logs/ 

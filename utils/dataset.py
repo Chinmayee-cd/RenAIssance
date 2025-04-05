@@ -16,7 +16,6 @@ class RenaissanceTextDataset(Dataset):
         self.split = split
         self.metadata_path = os.path.join(data_dir, 'metadata.json')
         
-        # Create style references directory if it doesn't exist
         self.style_dir = os.path.join(data_dir, 'style_references')
         os.makedirs(self.style_dir, exist_ok=True)
         
