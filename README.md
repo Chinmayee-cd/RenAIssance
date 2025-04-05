@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # Renaissance Text Generator
 
 A deep learning system for generating synthetic Renaissance-style printed text with realistic printing imperfections.
@@ -90,10 +89,6 @@ The model generates synthetic Renaissance-style text with the following characte
 - Historical font styles
 - Appropriate ink bleed and smudging effects
 - Consistent text layout and formatting
-
-## License
-
-This project is licensed under the MIT License - see the LICENSE file for details.
 =======
 # Renaissance Text Generator
 
@@ -186,8 +181,3 @@ The model generates synthetic Renaissance-style text with the following characte
 - Historical font styles
 - Appropriate ink bleed and smudging effects
 - Consistent text layout and formatting
-
-## License
-
-This project is licensed under the MIT License - see the LICENSE file for details.
->>>>>>> 0577fbaf673c3f23bd9da458071ca83cb5589cae
