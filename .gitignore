@@ -32,4 +32,10 @@ build/
 
 # Logs
 *.log
-logs/ 
+logs/
+
+# Data directory
+data/
+
+# Environment variables
+.env 
