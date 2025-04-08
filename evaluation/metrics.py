@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import torch
 import torch.nn as nn
 import numpy as np
@@ -14,7 +13,6 @@ class RenaissanceTextEvaluator:
         self.device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
         
     def calculate_ssim(self, generated, real):
-        """Calculate Structural Similarity Index between generated and real text."""
         # Convert to grayscale if needed
         if len(generated.shape) == 3:
             generated = cv2.cvtColor(generated, cv2.COLOR_RGB2GRAY)
@@ -24,7 +22,6 @@ class RenaissanceTextEvaluator:
         return ssim(generated, real, data_range=255)
     
     def calculate_fid(self, generated, real):
-        """Calculate Fréchet Inception Distance between generated and real text."""
         # Convert to numpy arrays if needed
         if torch.is_tensor(generated):
             generated = generated.cpu().numpy()
@@ -48,7 +45,6 @@ class RenaissanceTextEvaluator:
         return fid
     
     def calculate_ocr_accuracy(self, generated, real_text):
-        """Calculate OCR accuracy of generated text compared to real text."""
         # Convert to PIL Image if needed
         if not isinstance(generated, Image.Image):
             generated = Image.fromarray(generated)
@@ -62,7 +58,6 @@ class RenaissanceTextEvaluator:
         return correct / total
     
     def calculate_style_consistency(self, generated, reference):
-        """Calculate how well the generated text matches Renaissance style."""
         # Convert to grayscale if needed
         if len(generated.shape) == 3:
             generated = cv2.cvtColor(generated, cv2.COLOR_RGB2GRAY)
@@ -82,7 +77,6 @@ class RenaissanceTextEvaluator:
         return similarity
     
     def evaluate(self, generated, real, reference, real_text):
-        """Evaluate all metrics for the generated text."""
         results = {
             'ssim': self.calculate_ssim(generated, real),
             'fid': self.calculate_fid(generated, real),
@@ -108,16 +102,6 @@ class OCRMetrics:
         self.cer = nn.CTCLoss(blank=0, zero_infinity=True)
     
     def calculate_metrics(self, predicted_text, ground_truth):
-        """
-        Calculate OCR evaluation metrics
-        
-        Args:
-            predicted_text (str): Text predicted by the model
-            ground_truth (str): Ground truth text
-            
-        Returns:
-            dict: Dictionary containing various OCR metrics
-        """
         # Character Error Rate (CER)
         cer = self._calculate_cer(predicted_text, ground_truth)
         
@@ -134,14 +118,12 @@ class OCRMetrics:
         }
     
     def _calculate_cer(self, pred, target):
-        """Calculate Character Error Rate"""
         if not pred or not target:
             return 1.0
         distance = self._levenshtein_distance(pred, target)
         return distance / len(target)
     
     def _calculate_wer(self, pred, target):
-        """Calculate Word Error Rate"""
         pred_words = pred.split()
         target_words = target.split()
         if not pred_words or not target_words:
@@ -150,14 +132,12 @@ class OCRMetrics:
         return distance / len(target_words)
     
     def _calculate_accuracy(self, pred, target):
-        """Calculate text accuracy"""
         if not pred or not target:
             return 0.0
         correct = sum(1 for a, b in zip(pred, target) if a == b)
         return correct / max(len(pred), len(target))
     
     def _levenshtein_distance(self, s1, s2):
-        """Calculate Levenshtein distance between two sequences"""
         if len(s1) < len(s2):
             return self._levenshtein_distance(s2, s1)
         if len(s2) == 0:
@@ -180,16 +160,6 @@ class TextGenerationMetrics:
         self.mse = nn.MSELoss()
     
     def calculate_metrics(self, generated_image, reference_image):
-        """
-        Calculate text generation evaluation metrics
-        
-        Args:
-            generated_image (torch.Tensor): Generated image
-            reference_image (torch.Tensor): Reference image
-            
-        Returns:
-            dict: Dictionary containing various image quality metrics
-        """
         # Convert to numpy for skimage metrics
         gen_np = generated_image.cpu().numpy().transpose(1, 2, 0)
         ref_np = reference_image.cpu().numpy().transpose(1, 2, 0)
@@ -218,7 +188,6 @@ class TextGenerationMetrics:
         }
     
     def _calculate_style_consistency(self, gen_img, ref_img):
-        """Calculate how well the generated image maintains the style of the reference"""
         # Extract style features using simple statistics
         gen_mean = torch.mean(gen_img, dim=[2, 3])
         ref_mean = torch.mean(ref_img, dim=[2, 3])
@@ -231,7 +200,6 @@ class TextGenerationMetrics:
         return 1.0 - (mean_diff + std_diff) / 2
     
     def _calculate_artifact_score(self, image):
-        """Calculate how well the image simulates printing artifacts"""
         # Check for ink bleed
         kernel = torch.ones(3, 3).to(image.device) / 9
         kernel = kernel.view(1, 1, 3, 3)
